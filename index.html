@@ -6,21 +6,23 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <style type="text/css"></style>
         <link rel="icon" href="/favicon.ico">
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js"></script>
     </head>
     <body>
         <header>
+            <img src="./assets/personal-logo.jpg" alt="personal logo" class="logo">
+            <h1>RP Anime Finder</h1>
             <nav>
-                <img src="./assets/personal-logo.jpg" alt="personal logo" class="logo">
                 <a href="#">Browse</a>
                 <a href="#">Search</a>
                 <a href="#">About</a>
             </nav>
-            <h1>RP Anime Finder</h1>
         </header>
         <main>
             <label for="search">Search Anime</label>
             <input type="text" id="search">
-            <button type="button">Search</button>
+            <button type= "button" id= "search-button">Search</button>
             <div id="anime-results"></div>
         </main>
         <footer>
