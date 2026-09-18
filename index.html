@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <style type="text/css"></style>
-        <link rel="icon" href="/favicon.ico">
+        <link rel="icon" type="imge/jpeg" href="./assets/personal-logo.jpg"> >
         <link rel="stylesheet" href="./style.css">
         <script src="./script.js" defer></script>
     </head>
@@ -20,9 +20,18 @@
             </nav>
         </header>
         <main>
-            <label for="search">Search Anime</label>
-            <input type="text" id="search">
-            <button type= "button" id= "search-button">Search</button>
+            <div class="search-controls">
+                <label for="search">Search Anime</label>
+                <input type="text" id="search" placeholder="Search for an anime">
+                <button type= "button" id= "search-button">Search</button>
+                <div class="filter-controls">
+                    <label for="year-filter">Aired Year</label>
+                    <select id="year-filter">
+                        <option value="all">All Years</option>
+                    </select>
+                </div>
+            </div>
+             
             <div id="anime-results"></div>
         </main>
         <footer>
