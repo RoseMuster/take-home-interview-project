@@ -5,6 +5,7 @@ const yearFilter = document.getElementById("year-filter");
 const sortFilter = document.getElementById("sort-filter");
 const API_URL = "https://api.tenrai.org/v1/anime?q=";
 let animeData = [];
+let filteredData = [];
 searchButton.addEventListener("click", function () {
     animeResults.innerHTML = "<p>Loading</p>;"
     const query = search.value;
@@ -37,7 +38,7 @@ searchButton.addEventListener("click", function () {
         });
 
         yearFilter.value = selectedYear;  
-        const filteredData = selectedYear=== "all"
+        filteredData = selectedYear=== "all"
             ? data.data
             : data.data.filter(anime => new 
                 Date(anime.aired.from).getFullYear().toString() === selectedYear
@@ -51,18 +52,7 @@ searchButton.addEventListener("click", function () {
                 synopsis: anime.synopsis
             }; 
         });
-        const animeHTML = anime.map(anime => {
-            return `
-                <div class="anime-card" data-year="${new Date(anime.aired).getFullYear()}">
-                    <h2>${anime.title}</h2>
-                    <img src="${anime.image}" alt="${anime.title}">
-                    <p class="anime-date">Aired: ${anime.aired}</p>
-                    <p>${anime.synopsis}</p>
-                </div>
-            `;
-        })
-        const animeHTMLString = animeHTML.join("");
-        animeResults.innerHTML = animeHTMLString;
+        
     })
     .catch(error => console.error(error));
     animeResults.innerHTML = "<p>Something went wrong. Please try again. </p>";
@@ -76,4 +66,26 @@ function (event) {
 });
 sortFilter.addEventListener("change", function() {
     console.log(sortFilter.value);
-});
+    if (sortFilter.value === "az") {
+        filteredData.sort((a,b) => a.title.localeCompare(b.title));
+    }
+    else if (sortFilter.value === "za") {
+        filteredData.sort((a, b) => b.title.localeCompare(a.title));
+    }
+    renderResults();
+}); 
+
+function renderResults() {
+    const animeHTML = filteredData.map(anime => {
+            return `
+                <div class="anime-card" data-year="${new Date(anime.aired).getFullYear()}">
+                    <h2>${anime.title}</h2>
+                    <img src="${anime.image}" alt="${anime.title}">
+                    <p class="anime-date">Aired: ${anime.aired}</p>
+                    <p>${anime.synopsis}</p>
+                </div>
+            `;
+        })
+        const animeHTMLString = animeHTML.join("");
+        animeResults.innerHTML = animeHTMLString;
+}
