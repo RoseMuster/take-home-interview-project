@@ -2,13 +2,13 @@ const search = document.getElementById("search");
 const searchButton = document.getElementById("search-button");
 const animeResults = document.getElementById("anime-results");
 const yearFilter = document.getElementById("year-filter");
+const sortFilter = document.getElementById("sort-filter");
 const API_URL = "https://api.tenrai.org/v1/anime?q=";
 let animeData = [];
 searchButton.addEventListener("click", function () {
     animeResults.innerHTML = "<p>Loading</p>;"
     const query = search.value;
     const url = API_URL + encodeURIComponent(query);
-
     
     fetch(url)
     .then(response => {  
@@ -39,7 +39,7 @@ searchButton.addEventListener("click", function () {
         yearFilter.value = selectedYear;  
         const filteredData = selectedYear=== "all"
             ? data.data
-            : data.data.filter(anime => new
+            : data.data.filter(anime => new 
                 Date(anime.aired.from).getFullYear().toString() === selectedYear
             );
 
@@ -62,7 +62,7 @@ searchButton.addEventListener("click", function () {
             `;
         })
         const animeHTMLString = animeHTML.join("");
-        animeResults.innerHTML =animeHTMLString;
+        animeResults.innerHTML = animeHTMLString;
     })
     .catch(error => console.error(error));
     animeResults.innerHTML = "<p>Something went wrong. Please try again. </p>";
@@ -74,7 +74,6 @@ function (event) {
     searchButton.click(); 
     }
 });
-
-
-
-
+sortFilter.addEventListener("change", function() {
+    console.log(sortFilter.value);
+});
