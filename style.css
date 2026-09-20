@@ -124,3 +124,15 @@ main button:hover {
     height: 250px;
     object-fit: cover;
 }
+
+@media (max-width: 768px) {
+    #anime-results {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    #anime-results {
+        grid-template-columns: 1fr;
+    }
+}

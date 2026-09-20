@@ -52,10 +52,13 @@ searchButton.addEventListener("click", function () {
                 synopsis: anime.synopsis
             }; 
         });
+        renderResults(anime);
         
     })
-    .catch(error => console.error(error));
-    animeResults.innerHTML = "<p>Something went wrong. Please try again. </p>";
+    .catch(error => {
+        console.error(error);
+        animeResults.innerHTML = "<p>Something went wrong. Please try again.</p>";
+    });
 });
 
 search.addEventListener("keydown", 
@@ -67,16 +70,22 @@ function (event) {
 sortFilter.addEventListener("change", function() {
     console.log(sortFilter.value);
     if (sortFilter.value === "az") {
-        filteredData.sort((a,b) => a.title.localeCompare(b.title));
+        anime.sort((a,b) => a.title.localeCompare(b.title));
     }
     else if (sortFilter.value === "za") {
-        filteredData.sort((a, b) => b.title.localeCompare(a.title));
+        anime.sort((a, b) => b.title.localeCompare(a.title));
     }
-    renderResults();
+    else if (sortFilter.value === "newest") {
+        anime.sort((a,b) => new Date(b.aired) - new Date(a.aired));
+    }
+    else if (sortFilter.value === "oldest") {
+        anime.sort((a,b) => new Date(a.aired) - new Date(b.aired));
+    }
+    renderResults(anime);
 }); 
 
-function renderResults() {
-    const animeHTML = filteredData.map(anime => {
+function renderResults(filteredData) {
+    const animeHTML = filteredData.slice(0,6).map(anime => {
             return `
                 <div class="anime-card" data-year="${new Date(anime.aired).getFullYear()}">
                     <h2>${anime.title}</h2>
@@ -85,7 +94,7 @@ function renderResults() {
                     <p>${anime.synopsis}</p>
                 </div>
             `;
-        })
+    })
         const animeHTMLString = animeHTML.join("");
         animeResults.innerHTML = animeHTMLString;
 }
