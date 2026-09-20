@@ -30,6 +30,18 @@ nav a {
     margin-left: 20px;
 }
 
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle span {
+    display:block;
+    width: 25px;
+    height: 3px;
+    margin: 4px 0;
+    background-color:#4da789;
+}
+
 .logo {
     width: 100px;
     height: 100px;
@@ -57,7 +69,8 @@ main button:hover {
 }
 
 #search {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -80,6 +93,7 @@ main button:hover {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    flex-wrap: wrap;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -110,8 +124,10 @@ main button:hover {
 .anime-card p {
     font-size: 14px;
     line-height: 1.5;
-    max-height: 120px;
-    overflow: hidden; 
+    max-height: 140px;
+    overflow: hidden;
+    padding: 0 8px;
+    margin-bottom: 16px;
 }
 
 .anime-date {
@@ -125,14 +141,47 @@ main button:hover {
     object-fit: cover;
 }
 
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
 @media (max-width: 768px) {
+    h1 {
+        margin-left: 15px;
+        font-size: 24px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
     #anime-results {
         grid-template-columns: repeat(2,1fr);
+    }
+
+    nav {
+        display: none;
+    }
+
+    nav.nav-open {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-right: 5px;
     }
 }
 
 @media (max-width: 480px) {
     #anime-results {
         grid-template-columns: 1fr;
+    }
+
+    .search-controls {
+        flex-direction: column;
     }
 }
